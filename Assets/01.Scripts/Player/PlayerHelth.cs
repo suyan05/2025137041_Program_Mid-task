@@ -15,9 +15,11 @@ public class PlayerHelth : MonoBehaviour
 
     private void Awake()
     {
-        GM.Timer = 1f;
         rb = GetComponent<Rigidbody2D>();
         PlyerRenderer = GetComponent<SpriteRenderer>();
+
+        GM.PHP = 15;
+        GM.Timer = 1f;
     }
 
     private void Update()

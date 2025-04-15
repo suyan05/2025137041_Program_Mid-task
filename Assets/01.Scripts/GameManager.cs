@@ -18,11 +18,21 @@ public class GameManager : MonoBehaviour
     public Transform GroundCh;
     public LayerMask GroundLay;
 
+    [Header("Enemy")]
+    public int EPower = 1;
+    public float raycastDistance = 3f;
+    public float traceDistance = 2f;
+
+    public Transform player;
+
     [Header("Enemy_1")]
     public float ESpeed_1 = 3f;
     public int EHP_1 = 3;
 
-    public int EPower = 1;
+    [Header("Enemy_2")]
+    public float ESpeed_2 = 3f;
+    public int EHP_2 = 3;
+
 
     [Header("≈∏¿œ")]
     public Component DistoryTile;

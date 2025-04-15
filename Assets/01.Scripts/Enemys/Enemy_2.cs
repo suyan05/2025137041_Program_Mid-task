@@ -4,15 +4,44 @@ using UnityEngine;
 
 public class Enemy_2 : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameManager GM;
+
+    private Rigidbody2D rb;
+    private Animator EAni;
+
+    private void Awake()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
+        EAni = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        FollowEnemy();
+    }
+
+    private void FollowEnemy()
+    {
+        Vector2 direction = GM.player.position - transform.position;
+
+        if (direction.magnitude > GM.traceDistance) return;
+
+        Vector2 directionNormalized = direction.normalized;
+
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, directionNormalized, GM.raycastDistance);
+        Debug.DrawRay(transform.position, directionNormalized * GM.raycastDistance, Color.red);
+
+        foreach (RaycastHit2D rHit in hits)
+        {
+            if(rHit.collider!=null&&rHit.collider.CompareTag("Ground"))
+            {
+                Vector3 alternativeDirection = Quaternion.Euler(0f, 0f, -90f) * direction;
+                transform.Translate(alternativeDirection * GM.ESpeed_2 * Time.deltaTime);
+            }
+            else
+            {
+                transform.Translate(direction * GM.ESpeed_2 * Time.deltaTime);
+            }
+        }
     }
 }

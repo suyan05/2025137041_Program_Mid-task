@@ -32,12 +32,12 @@ public class PlayerControl : MonoBehaviour
 
         isJump = Physics2D.OverlapCircle(GM.GroundCh.position, 0.2f, GM.GroundLay);
 
-        if (MoveInput > 0) 
+        if (MoveInput > 0)
         {
             transform.localScale = new Vector3(1f, 1f, 1f);
             PAni.SetBool("Player_Move", true);
         }
-        else if (MoveInput < 0) 
+        else if (MoveInput < 0)
         {
             transform.localScale = new Vector3(-1f, 1f, 1f);
             PAni.SetBool("Player_Move", true);
@@ -80,10 +80,5 @@ public class PlayerControl : MonoBehaviour
                 }
             }
         }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-
     }
 }
