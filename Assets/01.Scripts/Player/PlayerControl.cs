@@ -4,17 +4,10 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
-    public float PSpeed = 3f;
-    public float PJumpPower = 3f;
-    public float PAttackPower = 3f;
-    public float PHP = 10f;
+    public GameManager GM;
 
     private bool isJump = true;
     private bool isDoubleJump = false;
-    private bool isGround = true;
-
-    public Transform GroundCh;
-    public LayerMask GroundLay;
 
     private Rigidbody2D rb;
     private Animator PAni;
@@ -28,14 +21,15 @@ public class PlayerControl : MonoBehaviour
     private void Update()
     {
         PlayerMove();
+        isGround();
     }
 
     private void PlayerMove()
     {
         float MoveInput = Input.GetAxisRaw("Horizontal");
-        rb.velocity = new Vector2(MoveInput * PSpeed, rb.velocity.y);
+        rb.velocity = new Vector2(MoveInput * GM.PSpeed, rb.velocity.y);
 
-        isJump = Physics2D.OverlapCircle(GroundCh.position, 0.2f, GroundLay);
+        isJump = Physics2D.OverlapCircle(GM.GroundCh.position, 0.2f, GM.GroundLay);
 
         if (MoveInput > 0) 
         {
@@ -59,23 +53,37 @@ public class PlayerControl : MonoBehaviour
             Jump();
             isDoubleJump = false;
         }
-        else if (isGround == true) { PAni.SetBool("Player_Jump", false); }
     }
 
     private void Jump()
     {
-        rb.AddForce(Vector2.up * PJumpPower, ForceMode2D.Impulse);
-        PAni.SetBool("Player_Jump", true);
-        isGround = false;
+        rb.AddForce(Vector2.up * GM.PJumpPower, ForceMode2D.Impulse);
+        PAni.SetBool("Player_Jump_Up", true);
+    }
+
+    private void isGround()
+    {
+        if (rb.velocity.y < 0)
+        {
+            PAni.SetBool("Player_Jump_Down", true);
+            PAni.SetBool("Player_Jump_Up", false);
+
+            Debug.DrawRay(rb.position, Vector3.down, new Color(0, 1, 0));
+            RaycastHit2D rayHit = Physics2D.Raycast(rb.position, Vector3.down, 1, LayerMask.GetMask("Ground"));
+            if (rayHit.collider != null)
+            {
+                if (rayHit.distance < 0.6f)
+                {
+                    Debug.Log(rayHit.collider.name);
+                    PAni.SetBool("Player_Jump_Down", false);
+                }
+            }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground")
-        {
-            isGround = true;
-            Debug.Log("점프 가능");
-        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -87,3 +95,7 @@ public class PlayerControl : MonoBehaviour
     }
 
 }
+
+
+/* UnityEngine.SceneManagement.SceneManager.LoadScene("Room_" + collision.name);
+        Debug.Log("Room_ " + collision.name + " 이동"); */
