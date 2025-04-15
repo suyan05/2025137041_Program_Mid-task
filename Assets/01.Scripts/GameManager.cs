@@ -20,9 +20,9 @@ public class GameManager : MonoBehaviour
 
     [Header("Enemy_1")]
     public float ESpeed_1 = 3f;
-
-    public int Power_Enemy_1 = 1;
     public int EHP_1 = 3;
+
+    public int EPower = 1;
 
     [Header("≈∏¿œ")]
     public Component DistoryTile;
