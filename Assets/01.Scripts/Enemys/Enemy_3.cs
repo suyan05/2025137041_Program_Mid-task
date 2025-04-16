@@ -22,7 +22,7 @@ public class Enemy_3 : MonoBehaviour
         EAni = GetComponent<Animator>();
         GM.Timer = 4.5f;
     }
-
+    
     private void Update()
     {
         Found();
@@ -32,9 +32,7 @@ public class Enemy_3 : MonoBehaviour
 
     private void Found()
     {
-        var PObj = Physics2D.OverlapCircle(transform.position, GM.FindeRange, GM.PlayerLayer);
-        print(PObj);
-
+        FoundPlayer = true;
     }
 
     private void EnemyMove()
@@ -73,11 +71,5 @@ public class Enemy_3 : MonoBehaviour
                 isAttack = true;
             }
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, GM.FindeRange);
     }
 }
