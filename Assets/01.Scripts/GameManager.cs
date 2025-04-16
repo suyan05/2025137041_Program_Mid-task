@@ -33,6 +33,11 @@ public class GameManager : MonoBehaviour
     public float ESpeed_2 = 3f;
     public int EHP_2 = 3;
 
+    [Header("Enemy_3")]
+    public float ESpeed_3 = 3f;
+    public int EHP_3 = 3;
+    public LayerMask PlayerLayer;
+    public float FindeRange = 4f;
 
     [Header("≈∏¿œ")]
     public Component DistoryTile;

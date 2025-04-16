@@ -4,11 +4,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerHelth : MonoBehaviour
+public class PlayerHealth : MonoBehaviour
 {
     public GameManager GM;
-
-    private bool isDamege = true;
 
     private SpriteRenderer PlyerRenderer;
     private Rigidbody2D rb;
@@ -35,6 +33,7 @@ public class PlayerHelth : MonoBehaviour
         }
     }
 
+    //GameOver
     private void PlayerDath()
     {
         if (GM.PHP <= 0) { GameOver(); }
@@ -45,11 +44,14 @@ public class PlayerHelth : MonoBehaviour
         gameObject.SetActive(false);
         Invoke("RestartGame", 3.0f);
     }
+
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+
+    //무적,데미지 계산
     private void OnDamege(Vector2 targetPos)
     {
         GM.PHP -= GM.EPower;
@@ -59,11 +61,11 @@ public class PlayerHelth : MonoBehaviour
 
         int dirc = transform.position.x - targetPos.x > 0 ? 1 : -1;
 
-        rb.AddForce(new Vector2(dirc, 1) * 1, ForceMode2D.Impulse);
+        rb.AddForce(new Vector2(dirc, 4) * 1, ForceMode2D.Impulse);
 
         PlyerRenderer.color = new Color(1, 1, 1, 0.4f);
 
-        Invoke("OffDamaged", 2f);
+        Invoke("OffDamaged", 1.5f);
     }
 
     void OffDamaged()

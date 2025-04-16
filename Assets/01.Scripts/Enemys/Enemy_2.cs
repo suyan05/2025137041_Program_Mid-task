@@ -17,10 +17,10 @@ public class Enemy_2 : MonoBehaviour
 
     private void Update()
     {
-        FollowEnemy();
+        FollowPlayer();
     }
 
-    private void FollowEnemy()
+    private void FollowPlayer()
     {
         Vector2 direction = GM.player.position - transform.position;
 
