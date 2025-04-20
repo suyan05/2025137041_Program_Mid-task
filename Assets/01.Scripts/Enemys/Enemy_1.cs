@@ -4,18 +4,26 @@ using UnityEngine;
 
 public class Enemy_1 : MonoBehaviour
 {
+    public PlayerControl PC;
+    
     public GameManager GM;
 
     private Rigidbody2D rb;
     private Animator EAni;
 
+    private int HP;
+
     private bool isMovingRight = true;
     private bool Move = true;
 
+    private SpriteRenderer ERenderer;
+
     private void Awake()
     {
+        HP = GM.EHP_1;
         rb = GetComponent<Rigidbody2D>();
         EAni = GetComponent<Animator>();
+        ERenderer = GetComponent<SpriteRenderer>();
 
         GM.Timer = 5f;
     }
@@ -23,6 +31,10 @@ public class Enemy_1 : MonoBehaviour
     private void Update()
     {
         EMove();
+        if (HP <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void EMove()
@@ -65,5 +77,22 @@ public class Enemy_1 : MonoBehaviour
         {
             isMovingRight = !isMovingRight;
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Attack")
+        {
+            if (!PC.isUpGradeDamege) { HP -= GM.PDamege;  }
+            else { HP -= GM.PDamege * 2; }
+
+            ERenderer.color = new Color(1, 1, 1, 0.4f);
+            Invoke("ColorEnd", 0.1f);
+        }
+    }
+
+    private void ColorEnd()
+    {
+        ERenderer.color = new Color(1, 1, 1, 1);
     }
 }

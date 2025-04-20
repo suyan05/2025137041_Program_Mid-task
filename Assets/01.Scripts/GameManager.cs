@@ -11,8 +11,8 @@ public class GameManager : MonoBehaviour
     [Header("플레이어")]
     public float PSpeed = 3f;
     public float PJumpPower = 3f;
+    public int PDamege = 1;
 
-    public int PAttackPower = 3;
     public int PHP = 10;
 
     public Transform GroundCh;
@@ -27,16 +27,17 @@ public class GameManager : MonoBehaviour
 
     [Header("Enemy_1")]
     public float ESpeed_1 = 3f;
-    public int EHP_1 = 3;
+    public int EHP_1 = 6;
 
     [Header("Enemy_2")]
     public float ESpeed_2 = 3f;
-    public int EHP_2 = 3;
+    public int EHP_2 = 4;
 
     [Header("Enemy_3")]
     public float ESpeed_3 = 3f;
     public int EHP_3 = 3;
-    public float StopDostance = 5f;
+    public float FollowHeight = 5f;
+    public float FollwDistancw = 3f;
 
     [Header("타일")]
     public Component DistoryTile;
