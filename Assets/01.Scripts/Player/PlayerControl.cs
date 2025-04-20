@@ -13,14 +13,18 @@ public class PlayerControl : MonoBehaviour
     private bool isJump = true;
     private bool isDoubleJump = false;
     public bool isUpGradeDamege = false;
+    private bool transferI = false;
+    private bool JUmpI = false;
 
     private Rigidbody2D rb;
     private Animator PAni;
+    private SpriteRenderer PlyerRenderer;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         PAni = GetComponent<Animator>();
+        PlyerRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -50,7 +54,14 @@ public class PlayerControl : MonoBehaviour
     private void PlayerMove()
     {
         float MoveInput = Input.GetAxisRaw("Horizontal");
-        rb.velocity = new Vector2(MoveInput * GM.PSpeed, rb.velocity.y);
+        if(!transferI)
+        {
+            rb.velocity = new Vector2(MoveInput * GM.PSpeed, rb.velocity.y);
+        }
+        else
+        {
+            rb.velocity = new Vector2(MoveInput * GM.PSpeed*2, rb.velocity.y);
+        }
 
         isJump = Physics2D.OverlapCircle(GM.GroundCh.position, 0.2f, GM.GroundLay);
 
@@ -80,7 +91,15 @@ public class PlayerControl : MonoBehaviour
 
     private void Jump()
     {
-        rb.AddForce(Vector2.up * GM.PJumpPower, ForceMode2D.Impulse);
+        if (!JUmpI)
+        {
+            rb.AddForce(Vector2.up * GM.PJumpPower, ForceMode2D.Impulse);
+        }
+        else
+        {
+            rb.AddForce(Vector2.up * GM.PJumpPower * 2, ForceMode2D.Impulse);
+        }
+        
         PAni.SetBool("Player_Jump_Up", true);
     }
 
@@ -103,35 +122,89 @@ public class PlayerControl : MonoBehaviour
             }
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Invincibility")
+        {
+            InvincibilityItem();
+        }
+
+        if (collision.gameObject.tag == "Transfer")
+        {
+            TransferItem();
+        }
+
+        if (collision.gameObject.tag == "Attack")
+        {
+            DamegeItem();
+        }
+        
+        if (collision.gameObject.tag == "Jump")
+        {
+            JumpItem();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Goal"))
+        {
+            collision.GetComponent<LevelObj>().MoveToNext();
+        }    
+    }
+
+    //무적
+    private void InvincibilityItem()
+    {
+        gameObject.layer = 8;
+        PlyerRenderer.color = new Color(1, 1, 1, 0.4f);
+
+        Invoke("OffDamaged", 5f);
+    }
+
+    private void OffDamaged()
+    {
+        gameObject.layer = 3;
+
+        PlyerRenderer.color = new Color(1, 1, 1, 1);
+    }
+
+    //이속 증가
+    private void TransferItem()
+    {
+        transferI = true;
+        Invoke("TransferItemOff", 5f);
+    }
+
+    private void TransferItemOff()
+    {
+        transferI = false;
+    }
+
+    //데미지 업
+    private void DamegeItem()
+    {
+        isUpGradeDamege = true;
+        Invoke("DamegeItemOff", 5f);
+    }
+
+    private void DamegeItemOff()
+    {
+        isUpGradeDamege = false;
+    }
+
+    //점프 업
+    private void JumpItem()
+    {
+        JUmpI = true;
+        Invoke("JumpItemOff", 5f);
+    }
+
+    private void JumpItemOff()
+    {
+        JUmpI = false;
+    }
+
+
 }
-
-/*using UnityEngine;
-
-public class PlayerShooting : MonoBehaviour
-{
-    public GameObject bulletPrefab; // 총알 프리팹
-    public Transform firePoint; // 총알이 발사되는 위치
-    public float bulletSpeed = 10f; // 총알 속도
-
-    void Update()
-    {
-        // 스페이스바를 눌렀을 때 총알 발사
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Shoot();
-        }
-    }
-
-    void Shoot()
-    {
-        // 총알 생성
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-
-        // 총알에 속도 추가
-        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        if (rb != null)
-        {
-            rb.velocity = firePoint.right * bulletSpeed;
-        }
-    }
-}*/

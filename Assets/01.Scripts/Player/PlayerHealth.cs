@@ -28,6 +28,10 @@ public class PlayerHealth : MonoBehaviour
         {
             OnDamege(collision.transform.position);
         }
+        if(collision.gameObject.tag == "Pitfall")
+        {
+            GameOver();
+        }
     }
 
     //GameOver
@@ -65,7 +69,7 @@ public class PlayerHealth : MonoBehaviour
         Invoke("OffDamaged", 1.5f);
     }
 
-    void OffDamaged()
+    private void OffDamaged()
     {
         gameObject.layer = 3;
 

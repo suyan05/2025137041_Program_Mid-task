@@ -9,6 +9,10 @@ TagManager:
   - Enemy
   - Pitfall
   - Attack
+  - Invincibility
+  - Transfer
+  - Jump
+  - Goal
   layers:
   - Default
   - TransparentFX
