@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -9,6 +6,7 @@ public class PlayerControl : MonoBehaviour
     public GameObject Ball_1;
     public GameObject Ball_2;
     public Transform firePoint;
+
 
     private bool isJump = true;
     private bool isDoubleJump = false;
@@ -40,13 +38,21 @@ public class PlayerControl : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            if(!isUpGradeDamege)
+            if(!UIManager.ESC)
             {
-                GameObject ball = Instantiate(Ball_1, firePoint.position, firePoint.rotation);
+                Debug.Log("isUI True");
+                if (!isUpGradeDamege)
+                {
+                    GameObject ball = Instantiate(Ball_1, firePoint.position, firePoint.rotation);
+                }
+                else
+                {
+                    GameObject ball = Instantiate(Ball_2, firePoint.position, firePoint.rotation);
+                }
             }
             else
             {
-                GameObject ball = Instantiate(Ball_2, firePoint.position, firePoint.rotation);
+                Debug.Log("isUI false");
             }
         }
     }
@@ -97,7 +103,7 @@ public class PlayerControl : MonoBehaviour
         }
         else
         {
-            rb.AddForce(Vector2.up * GM.PJumpPower * 2, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.up * GM.PJumpPower * 1.5f, ForceMode2D.Impulse);
         }
         
         PAni.SetBool("Player_Jump_Up", true);
