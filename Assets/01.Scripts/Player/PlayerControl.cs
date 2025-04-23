@@ -204,7 +204,7 @@ public class PlayerControl : MonoBehaviour
     private void JumpItem()
     {
         JUmpI = true;
-        Invoke("JumpItemOff", 5f);
+        Invoke("JumpItemOff", 5.5f);
     }
 
     private void JumpItemOff()

@@ -547,11 +547,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b7beea6a118c504387a6ed413786413, type: 3}
---- !u!1 &513324774 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4310907812702633281, guid: 5661e51a3cd179048bf2da2ba8daf5ce, type: 3}
-  m_PrefabInstance: {fileID: 5081680948589497023}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1127,53 +1122,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1054705958
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1054705960}
-  - component: {fileID: 1054705959}
-  m_Layer: 0
-  m_Name: UIManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1054705959
+--- !u!114 &1054705959 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 6312585351415973197, guid: 5661e51a3cd179048bf2da2ba8daf5ce, type: 3}
+  m_PrefabInstance: {fileID: 5081680948589497023}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1054705958}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f70187ac928779947888ab3371e5ca9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  To: 0
-  ESC_Canvas: {fileID: 513324774}
-  To_Canvas: {fileID: 1865705060}
---- !u!4 &1054705960
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1054705958}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1060887263
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4069,11 +4028,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &1865705060 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3120560128337129988, guid: 5661e51a3cd179048bf2da2ba8daf5ce, type: 3}
-  m_PrefabInstance: {fileID: 5081680948589497023}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2054778868 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8425727103471810026, guid: 377dcdcb159afa249ba9571cca2af7b6, type: 3}
@@ -4348,18 +4302,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1435764087046851282, guid: 5661e51a3cd179048bf2da2ba8daf5ce, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1054705959}
-    - target: {fileID: 2970727840665406470, guid: 5661e51a3cd179048bf2da2ba8daf5ce, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1054705959}
-    - target: {fileID: 3459845678869907355, guid: 5661e51a3cd179048bf2da2ba8daf5ce, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1054705959}
+    - target: {fileID: 3120560128337129988, guid: 5661e51a3cd179048bf2da2ba8daf5ce, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6717114133308037980, guid: 5661e51a3cd179048bf2da2ba8daf5ce, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -4444,10 +4390,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 8348864510861020157, guid: 5661e51a3cd179048bf2da2ba8daf5ce, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1054705959}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4543,7 +4485,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 15557115}
-  - {fileID: 1054705960}
   - {fileID: 519420032}
   - {fileID: 1062262399}
   - {fileID: 8542080078475853115}

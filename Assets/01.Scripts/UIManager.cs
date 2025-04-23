@@ -44,6 +44,7 @@ public class UIManager : MonoBehaviour
     public void StageScene()
     {
         SceneManager.LoadScene("MainManu");
+        Time.timeScale = 1f;
     }
 
     public void GameEnd()
