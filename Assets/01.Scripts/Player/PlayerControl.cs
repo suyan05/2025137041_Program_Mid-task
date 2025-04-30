@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -7,6 +9,7 @@ public class PlayerControl : MonoBehaviour
     public GameObject Ball_2;
     public Transform firePoint;
 
+    public Text currentScore;
 
     private bool isJump = true;
     private bool isDoubleJump = false;
@@ -18,11 +21,15 @@ public class PlayerControl : MonoBehaviour
     private Animator PAni;
     private SpriteRenderer PlyerRenderer;
 
+    float score;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         PAni = GetComponent<Animator>();
         PlyerRenderer = GetComponent<SpriteRenderer>();
+
+        score = 1000f;
     }
 
     private void Update()
@@ -30,6 +37,14 @@ public class PlayerControl : MonoBehaviour
         PlayerMove();
         isGround();
         PlayerAttack();
+        CurrentScore();
+    }
+
+    public void CurrentScore()
+    {
+        score -= Time.deltaTime;
+
+        currentScore.text = "Score: " + score.ToString();
     }
 
     private void PlayerAttack()
@@ -156,6 +171,7 @@ public class PlayerControl : MonoBehaviour
     {
         if(collision.CompareTag("Goal"))
         {
+            DataSave.TrySet(SceneManager.GetActiveScene().buildIndex, (int)score);
             collision.GetComponent<LevelObj>().MoveToNext();
         }    
     }
