@@ -171,7 +171,8 @@ public class PlayerControl : MonoBehaviour
     {
         if(collision.CompareTag("Goal"))
         {
-            DataSave.TrySet(SceneManager.GetActiveScene().buildIndex, (int)score);
+            //DataSave.TrySet(SceneManager.GetActiveScene().buildIndex, (int)score);
+            StageResultSaver.SaveStage(SceneManager.GetActiveScene().buildIndex, (int)score);
             collision.GetComponent<LevelObj>().MoveToNext();
         }    
     }

@@ -69,7 +69,7 @@ public class UIManager : MonoBehaviour
     
     public void StageScene()
     {
-        SceneManager.LoadScene("MainManu");
+        SceneManager.LoadScene("00.MainManu");
         Time.timeScale = 1f;
     }
 
