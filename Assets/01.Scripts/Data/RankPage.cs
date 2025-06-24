@@ -110,6 +110,4 @@ public class RankPage : MonoBehaviour
             rankText.text = $"{i + 1}.{sorteaData[i].playerName}-{sorteaData[i].score}";
         }
     }
-
-
 }
